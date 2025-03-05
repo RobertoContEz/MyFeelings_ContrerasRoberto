@@ -2,9 +2,12 @@ package contreras.roberto.myfeelings.utilities
 
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.ColorFilter
 import android.graphics.Paint
+import android.graphics.PixelFormat
 import android.graphics.RectF
 import android.graphics.drawable.Drawable
+import androidx.core.content.ContextCompat
 import contreras.roberto.myfeelings.R
 
 class CustomCircleDrawable: Drawable {
@@ -35,7 +38,33 @@ class CustomCircleDrawable: Drawable {
 
         coordenadas = RectF(25.0F, 25.0F, ancho, alto)
 
-        p0.drawArc()
+        p0.drawArc(coordenadas!!, 0.0F, 360.0F, false, fondo)
+
+        if (emociones.size != 0) {
+            for (e in emociones) {
+                val degree: Float = (e.porcentaje*360)/100
+                this.anguloBarrido = degree
+
+                var seccion: Paint = Paint()
+                seccion.style = Paint.Style.STROKE
+                seccion.isAntiAlias = true
+                seccion.strokeWidth = (this.grosorMetrica).toFloat()
+                seccion.strokeCap = Paint.Cap.SQUARE
+                seccion.color = ContextCompat.getColor(this.context!!, e.color)
+
+                p0.drawArc(coordenadas!!, this.anguloInicio, this.anguloBarrido, false, seccion)
+
+                this.anguloInicio += this.anguloBarrido
+            }
+        }
     }
+
+    override fun setAlpha(p0: Int) {}
+
+    override fun getOpacity(): Int {
+        return PixelFormat.OPAQUE
+    }
+
+    override fun setColorFilter(p0: ColorFilter?) {}
 
 }

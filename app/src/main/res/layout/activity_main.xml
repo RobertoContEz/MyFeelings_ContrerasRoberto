@@ -66,7 +66,7 @@
                     android:layout_marginHorizontal="10dp"/>
 
                 <ImageButton
-                    android:id="@+id/nautralButton"
+                    android:id="@+id/neutralButton"
                     android:src="@drawable/ic_neutral"
                     android:background="@android:color/transparent"
                     android:layout_width="40dp"
@@ -140,7 +140,7 @@
                     android:layout_marginRight="15dp"/>
 
                 <View
-                    android:id="@+id/grapNeutral"
+                    android:id="@+id/graphNeutral"
                     android:layout_height="20dp"
                     android:layout_width="250dp"/>
 
